@@ -1,9 +1,8 @@
-import { AppBar, Box, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Toolbar } from '@mui/material';
 import ChatList from './chatList';
 import Messages from './Messages';
 import Input from './Input';
 import TopBar from './topbar';
-import Profile from './Profile';
 
 const sidebarWidth = '25%'; // Using percentage for consistent relative width
 

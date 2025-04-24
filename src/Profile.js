@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Box, IconButton, Card, Dialog, DialogTitle, DialogContent, Avatar, Button, Divider, TextField, Typography, styled, CircularProgress } from "@mui/material";
-import { Close, Edit, Check } from "@mui/icons-material";
+import { Box, IconButton, Card, Dialog, DialogTitle, DialogContent, Avatar, Button, Divider, TextField, Typography, CircularProgress } from "@mui/material";
+import { Close, Edit } from "@mui/icons-material";
 import { auth } from "./firebaseConfig";
 import { useSignOut } from "./Authentication";
 import { updateBio, updateDisplayName, getUserDetails } from './ProfileActions';

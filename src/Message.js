@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { ChatContext } from "./ChatContext";
 import { AuthContext } from "./context";
-import { Paper, Box, Typography, Avatar, CircularProgress } from "@mui/material";
+import { Paper, Box, Typography, Avatar } from "@mui/material";
 import { getUser, getUserDetails } from './ProfileActions';
 
 
