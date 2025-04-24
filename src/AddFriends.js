@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardHeader, Typography, Input, List, ListItem, 
 import { acceptUser, handleSearch } from "./Search";
 import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "./context";
-import { isFriend, setUserInbox, useCheckUserInbox } from "./Authentication";
+import { isFriend, setUserInbox, useCheckUserInbox } from './ProfileActions';
 import { ChatBubble, Close, Pending, PersonAdd } from "@mui/icons-material";
 import { ChatContext } from "./ChatContext";
 

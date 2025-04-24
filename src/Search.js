@@ -2,7 +2,7 @@ import { collection, query, where, getDoc, getDocs, doc, setDoc, serverTimestamp
 import { useContext, useState } from 'react';
 import { db } from './firebaseConfig';
 import { AuthContext } from './context';
-import { setUserInbox } from './Authentication';
+import { setUserInbox } from './ProfileActions';
 
 
 export const handleSearch = async (user, email) => {

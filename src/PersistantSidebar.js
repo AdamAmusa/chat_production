@@ -1,12 +1,17 @@
-import { Box, Divider, IconButton, List, ListItem, Link} from "@mui/material";
+import { Box, Divider, IconButton, List, ListItem, Button } from "@mui/material";
 import { ChatBubble, PersonAdd, Settings } from "@mui/icons-material";
 import Profile from "./Profile";
-import { useLocation , Link as RouterLink} from "react-router-dom";
-
-
+import { useLocation, Link as RouterLink } from "react-router-dom";
+import { auth } from "./firebaseConfig";
+import { useCheckUserInbox } from './ProfileActions';
+import Badge from "@mui/material/Badge";
+import { useSignOut } from "./Authentication";
 
 const SidebarIconButton = ({ to, icon, activePath }) => {
   const isActive = activePath === to;
+
+
+
 
   return (
     <IconButton
@@ -27,6 +32,8 @@ const SidebarIconButton = ({ to, icon, activePath }) => {
 };
 
 function PersistantSidebar({ width }) {
+  const signOut = useSignOut();
+  const { requests, loading, error } = useCheckUserInbox(auth.currentUser?.uid);
   const location = useLocation();
   return (
     <Box
@@ -44,14 +51,19 @@ function PersistantSidebar({ width }) {
         left: 0,
         zIndex: 1000,
         boxSizing: 'border-box',
+        
+
       }}
     >
       <div>
-       <List sx={{pt:10, gap:3, display: 'flex', flexDirection: 'column' }}>
-       <ListItem>
+        <List sx={{ pt: 10, gap: 3, display: 'flex', flexDirection: 'column' }}>
+          <ListItem>
             <SidebarIconButton
               to="/chatpage"
-              icon={<ChatBubble sx={{ width: 35, height: 35, fontSize: '2rem' }} />}
+              icon={
+                <ChatBubble sx={{ width: 35, height: 35, fontSize: '2rem' }} />
+
+              }
               activePath={location.pathname}
             />
           </ListItem>
@@ -61,26 +73,26 @@ function PersistantSidebar({ width }) {
           <ListItem>
             <SidebarIconButton
               to="/add"
-              icon={<PersonAdd sx={{ width: 35, height: 35, fontSize: '2rem' }} />}
+              icon={<Badge badgeContent={requests.length} color="error">
+                <PersonAdd sx={{ width: 35, height: 35, fontSize: '2rem' }} />
+              </Badge>
+              }
               activePath={location.pathname}
             />
           </ListItem>
-          <Divider />
-
-        <ListItem>
-        <IconButton>
-        <Settings  sx={{
-              width: 35,
-              height: 35,
-              fontSize: '2rem', 
-            }} />
-         </IconButton>
-        </ListItem>
 
 
-          <Profile sidebarWidth = {width}/>
-       </List>
+
+          <Profile sidebarWidth={width} />
+          
+        </List>
+        
       </div>
+      <Box sx={{position: 'absolute', bottom: 70, width: '100%', padding: 2}}>
+        <Button variant="text" color="error" onClick={signOut} sx={{ width: '100%' }}>
+          Logout
+        </Button>
+      </Box>
     </Box>
   );
 }

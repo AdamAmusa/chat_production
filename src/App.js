@@ -11,8 +11,7 @@ import { Navigate } from 'react-router-dom';
 import PersistantSidebar from './PersistantSidebar';
 import { Box } from '@mui/material';
 import AddFriends from './AddFriends';
-
-const sidebarWidth = 150;
+const sidebarWidth = 240;
 
 function App() {
   const { currentUser } = useContext(AuthContext);

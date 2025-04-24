@@ -1,4 +1,4 @@
-import { AppBar, Box, Toolbar } from '@mui/material';
+import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 import ChatList from './chatList';
 import Messages from './Messages';
 import Input from './Input';
@@ -25,14 +25,16 @@ const ChatPage = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'relative', 
-                overflow: 'hidden'
+                overflow: 'hidden',
+                zIndex: 1
             }}>
                 <Box sx={{
                     width: '100%',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
-                    overflowY: 'auto' // Allow scrolling only for the content
+                    overflowY: 'auto',
+                    
                 }}>
                     <ChatList />
                 </Box>

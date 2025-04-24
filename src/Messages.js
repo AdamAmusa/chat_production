@@ -3,7 +3,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { ChatContext } from "./ChatContext";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "./firebaseConfig";
-import { getLastConversation, setLastConversation } from "./Authentication";
+import { getLastConversation, setLastConversation } from './ProfileActions';
 import { AuthContext } from "./context";
 import { CircularProgress, Box } from "@mui/material";
 import { useMediaStream } from "./MediaStreamContext";

@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { ChatContext } from "./ChatContext";
 import { AuthContext } from "./context";
 import { Paper, Box, Typography, Avatar, CircularProgress } from "@mui/material";
-import { getUser } from "./Authentication";
+import { getUser, getUserDetails } from './ProfileActions';
 
 
 
@@ -17,7 +17,7 @@ const Message = ({ message, type }) => {
     useEffect(() => {
         const fetchOtherUser = async () => {
             if (!isSender && data?.user?.uid) {
-                const userData = await getUser(data.user.uid);
+                const userData = await getUserDetails(data.user.uid);
                 setOtherUser(userData);
             }
         };
