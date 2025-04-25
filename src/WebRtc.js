@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { doc, setDoc, getDoc, onSnapshot, updateDoc, collection, addDoc, getDocs } from "firebase/firestore";
+import { doc, setDoc, getDoc, onSnapshot, updateDoc, collection, addDoc, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig"; // Ensure correct import
 import { AuthContext } from "./context";
 import { ChatContext } from "./ChatContext";
@@ -72,12 +72,33 @@ export const useEndCall = () => {
         if (!currentUser) return;
         console.log("currentUser:", currentUser);
         console.log("data.user:", data?.user);
+        
         const signalingDoc = doc(db, `signaling/${currentUser.uid}`);
         const receiverDoc = doc(db, `signaling/${data.user.uid}`);
+        
         try {
             console.log("Ending call");
+            
+            const myIceCandidatesCollection = collection(signalingDoc, 'iceCandidates');
+            const myIceCandidatesSnapshot = await getDocs(myIceCandidatesCollection);
+            
+            const deletePromises = [];
+            myIceCandidatesSnapshot.forEach(doc => {
+                deletePromises.push(deleteDoc(doc.ref));
+            });
+            
+            const otherIceCandidatesCollection = collection(receiverDoc, 'iceCandidates');
+            const otherIceCandidatesSnapshot = await getDocs(otherIceCandidatesCollection);
+            
+            otherIceCandidatesSnapshot.forEach(doc => {
+                deletePromises.push(deleteDoc(doc.ref));
+            });
+            
+            await Promise.all(deletePromises);     
             await updateDoc(signalingDoc, { offer: null, answer: null });
-            await updateDoc(receiverDoc, { offer: null, answer: null});
+            await updateDoc(receiverDoc, { offer: null, answer: null });
+            
+            // Close peer connection and stop tracks
             if (peerConnectionRef.current) {
                 const senders = peerConnectionRef.current.getSenders();
                 senders.forEach(sender => {
@@ -88,6 +109,7 @@ export const useEndCall = () => {
                 peerConnectionRef.current.close();
                 peerConnectionRef.current = null;
             }
+            
             navigate("/chatpage");
             setIsVideoOn(true);
         } catch (error) {
