@@ -43,6 +43,7 @@ const Input = () => {
     };
 
     const uploadFile = (selectedFile) => {
+        console.log("API Base URL: " + apiBase);
         setIsImageUploading(true);
         console.log("Uploading file loading...");
         const formData = new FormData();
