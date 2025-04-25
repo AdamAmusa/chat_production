@@ -20,6 +20,7 @@ const Input = () => {
     const inputRef = useRef(null);
     const {isImageUploading, setIsImageUploading} = useMediaStream();
     const [file, setFile] = useState(null);
+    
     const apiBase = process.env.REACT_APP_API_BASE_URL;
     useEffect(() => {
         const handleClickOutside = (event) => {
