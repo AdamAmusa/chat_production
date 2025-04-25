@@ -8,7 +8,6 @@ import express from 'express';
 import multer from 'multer';
 import { verifyToken } from './FirebaseAdmin.js';
 
-
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 const port = 5000;

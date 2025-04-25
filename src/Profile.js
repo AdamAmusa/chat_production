@@ -22,7 +22,8 @@ const Profile = ({ sidebarWidth }) => {
     const [userDetails, setUserDetails] = useState(null);
     const [bio, setBio] = useState(''); 
     const [hasFetched, setHasFetched] = useState(false); 
-
+    
+    const apiBase = process.env.REACT_APP_API_BASE_URL;
 
    
     useEffect(() => {
@@ -107,7 +108,7 @@ const Profile = ({ sidebarWidth }) => {
             const formData = new FormData();
             formData.append('file', selectedFile);
             formData.append('id', currentUser.uid);
-            const response = await fetch('/api/upload-profile', {
+            const response = await fetch(`${apiBase}/api/upload-profile`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

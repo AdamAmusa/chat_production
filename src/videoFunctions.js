@@ -53,7 +53,7 @@ const VideoFunctions = ({ stream }) => {
 
         if (isCaptioned && stream) {
             console.log("Caption enabled");
-            const wsUrl = `ws://${window.location.hostname}:5000/ws`;
+            const wsUrl = process.env.REACT_APP_WS_BASE_URL;
             ws = new WebSocket(wsUrl);
 
             ws.onopen = () => {

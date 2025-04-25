@@ -20,7 +20,7 @@ const Input = () => {
     const inputRef = useRef(null);
     const {isImageUploading, setIsImageUploading} = useMediaStream();
     const [file, setFile] = useState(null);
-
+    const apiBase = process.env.REACT_APP_API_BASE_URL;
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (emojiPickerRef.current && !emojiPickerRef.current.contains(event.target)) {
@@ -49,7 +49,7 @@ const Input = () => {
         formData.append('senderId', currentUser.uid);
         formData.append('id', uuid());
         formData.append('chatId', data.chatId);
-        fetch('api/upload', {
+        fetch(`${apiBase}api/upload`, {
             method: 'POST',
             body: formData
         }).then((response) => {
