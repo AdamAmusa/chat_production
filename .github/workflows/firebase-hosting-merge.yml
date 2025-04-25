@@ -11,6 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create .env.production from secrets
+        run: |
+          echo "REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }}" >> .env.production
+          echo "REACT_APP_WS_BASE_URL=${{ secrets.REACT_APP_WS_BASE_URL }}" >> .env.production
+
+      - name: Build with environment variables
+        run: npx dotenv -e .env.production -- npm run build    
+
       - run: "npm ci && CI=false npm run build"
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -18,3 +27,5 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CHAT_E48D2 }}
           channelId: live
           projectId: chat-e48d2
+
+
