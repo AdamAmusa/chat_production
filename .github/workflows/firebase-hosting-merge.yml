@@ -20,9 +20,6 @@ jobs:
       - name: Build with environment variables
         run: cross-env REACT_APP_API_BASE_URL=${{ secrets.REACT_APP_API_BASE_URL }} REACT_APP_WS_BASE_URL=${{ secrets.REACT_APP_WS_BASE_URL }} CI=false npm run build
 
-      - name: Build with environment variables
-        run: npm run build:prod
-
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
