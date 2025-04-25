@@ -78,8 +78,13 @@ export const useEndCall = () => {
             console.log("Ending call");
             await updateDoc(signalingDoc, { offer: null, answer: null });
             await updateDoc(receiverDoc, { offer: null, answer: null});
-            
             if (peerConnectionRef.current) {
+                const senders = peerConnectionRef.current.getSenders();
+                senders.forEach(sender => {
+                    if (sender.track) {
+                        sender.track.stop();
+                    }
+                });
                 peerConnectionRef.current.close();
                 peerConnectionRef.current = null;
             }
