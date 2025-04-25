@@ -10,6 +10,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open https://chat-e48d2.web.app or
+     https://chat-e48d2.firebaseapp.com
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
