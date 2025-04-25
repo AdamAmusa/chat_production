@@ -51,7 +51,7 @@ const Input = () => {
         formData.append('senderId', currentUser.uid);
         formData.append('id', uuid());
         formData.append('chatId', data.chatId);
-        fetch(`${apiBase}api/upload`, {
+        fetch(`${apiBase}/api/upload`, {
             method: 'POST',
             body: formData
         }).then((response) => {
