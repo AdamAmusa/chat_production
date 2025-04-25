@@ -49,7 +49,6 @@
     "start": "react-scripts start",
     "dev": "concurrently \"cd ./server && npm run start\" \"npm run start\"",
     "build": "react-scripts build",
-    "build:prod": "cross-env REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL} REACT_APP_WS_BASE_URL=${REACT_APP_WS_BASE_URL} CI=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
